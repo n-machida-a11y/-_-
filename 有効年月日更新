@@ -36,7 +36,10 @@ function onChangeTrigger() {
       }
 
       if (dateVal) { // 有効な日付が取得できたら
-        eCell.setValue(dateVal);   // E列に設定
+        // 更新日から5年後を有効期限として設定
+        const newExpDate = new Date(dateVal);
+        newExpDate.setFullYear(newExpDate.getFullYear() + 5);
+        eCell.setValue(newExpDate);   // E列に更新日+5年を設定
         hCell.clearContent();      // H列をクリア
         gCell.setValue("未");      // G列を「未」に
         iCell.clearContent();      // I列をクリア
