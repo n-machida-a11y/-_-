@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>許可証管理アプリ 操作マニュアル</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', Meiryo, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 20px;
+        }
+        h1 {
+            font-size: 2em;
+            text-align: center;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        h2, h3 {
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h2 { font-size: 1.5em; }
+        h3 { font-size: 1.2em; border-bottom: 1px dashed #007bff; }
+        p, li { font-size: 1em; }
+        ul { list-style-type: disc; padding-left: 20px; }
+        strong { color: #007bff; }
+        .note {
+            background-color: #f0f8ff;
+            border-left: 5px solid #007bff;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        /* Tab styles */
+        .tab-container {
+            display: flex;
+            overflow-x: auto;
+            white-space: nowrap;
+            border-bottom: 2px solid #ccc;
+            margin-bottom: 20px;
+            padding-bottom: 2px;
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        .tab-container::-webkit-scrollbar {
+            display: none;
+        }
+        .tab {
+            flex-shrink: 0;
+            padding: 10px 15px;
+            cursor: pointer;
+            border: 1px solid transparent;
+            border-bottom: none;
+            font-size: 1.0em;
+            background-color: #f1f1f1;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .tab:hover {
+            background-color: #ddd;
+        }
+        .tab.active {
+            background-color: #fff;
+            border-color: #ccc #ccc #fff;
+            border-style: solid;
+            border-width: 1px;
+            font-weight: bold;
+        }
+        .tab-content {
+            display: none;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-top: none;
+            border-radius: 0 0 5px 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .tab-content.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>許可証管理アプリ ユーザーマニュアル 📜</h1>
+
+    <div class="tab-container">
+        <div class="tab active" onclick="openTab(event, 'Introduction')">はじめに</div>
+        <div class="tab" onclick="openTab(event, 'MainScreens')">主な画面</div>
+        <div class="tab" onclick="openTab(event, 'BasicUsage')">基本的な使い方</div>
+        <div class="tab" onclick="openTab(event, 'LicenseRenewal')">許可証の更新</div>
+        <div class="tab" onclick="openTab(event, 'CertificateRenewal')">修了証の更新</div>
+        <div class="tab" onclick="openTab(event, 'Notifications')">📧メール通知</div>
+    </div>
+
+    <div id="Introduction" class="tab-content active">
+        <h2>はじめに</h2>
+        <p>このアプリは、会社で必要な<strong>許可証</strong>や<strong>修了証</strong>の情報を一元管理し、有効期限の管理を効率化することを目的としています。期限が近づくと通知が表示され、更新漏れを防ぐことができます。</p>
+    </div>
+
+    <div id="MainScreens" class="tab-content">
+        <h2>主な画面の説明</h2>
+        <h3>1. 更新対応一覧 (トップ画面) 📢</h3>
+        <p>アプリ起動時に表示されるメイン画面です。<strong>有効期限が3ヶ月以内</strong>に迫っている許可証や、更新対応中のものが一覧で表示されます。</p>
+        <h3>2. 許可証一覧 📑</h3>
+        <p>登録されている<strong>すべての許可証</strong>を一覧で確認できる画面です。新しい許可証の登録や、登録内容の編集もこの画面から行います。</p>
+        <h3>3. 修了書一覧 🎓</h3>
+        <p>許可証に紐づく<strong>すべての修了証</strong>をカード形式で確認できる画面です。</p>
+    </div>
+
+    <div id="BasicUsage" class="tab-content">
+        <h2>基本的な使い方</h2>
+        <h3>データの登録・編集</h3>
+        <p>各一覧画面の右下にある「<strong>+</strong>」ボタンから新規登録ができます。一覧の各項目をタップすると詳細が表示され、編集ボタン（鉛筆マーク）から内容を修正できます。</p>
+    </div>
+
+    <div id="LicenseRenewal" class="tab-content">
+        <h2>許可証の更新フローについて</h2>
+        <p>許可証の更新は、ステータスを変更していくことで管理します。「更新対応一覧」または「許可証一覧」の詳細画面から、以下の操作を行ってください。</p>
+        
+        <ol>
+            <li><strong>申請準備中:</strong>
+                <p>更新の準備を始めたら、<strong>[申請準備中]</strong> ボタンをタップします。ステータスが「申請準備中」に変わります。</p>
+            </li>
+            <li><strong>申請中:</strong>
+                <p>行政などへの申請が完了したら、<strong>[申請中]</strong> ボタンをタップします。申請対応者名を入力する画面が表示されるので、担当者名を入力して保存します。</p>
+            </li>
+            <li><strong>更新済:</strong>
+                <p>新しい許可証が発行されたら、<strong>[更新済]</strong> ボタンをタップします。新しい許可証の発行日（更新日）を入力して保存します。</p>
+            </li>
+            <li><strong>有効期限を上書き:</strong>
+                <p>最後に、<strong>[有効期限を上書き]</strong> ボタンをタップします。確認メッセージが表示されるので「はい」を選択すると、先ほど入力した「更新日」が新しい「許可有効年月日」として自動で上書きされ、ステータスが元に戻り、更新作業は完了です。</p>
+            </li>
+        </ol>
+    </div>
+
+    <div id="CertificateRenewal" class="tab-content">
+        <h2>修了証の更新フローについて</h2>
+        <ol>
+            <li><strong>講習日の登録:</strong>
+                <p>次回の講習日が決まったら、「修了書一覧」から該当の修了証を選び、編集画面で<strong>[講習日]</strong> を入力して保存します。</p>
+            </li>
+            <li><strong>修了証の受領と更新:</strong>
+                <p>講習が完了し、新しい修了証を受け取ったら、詳細画面にある <strong>[修了証受領]</strong> ボタンをタップします。 これにより、入力しておいた「講習日」が新しい「修了証発行年月日」として自動で登録され、更新作業は完了です。 新しい修了証の写真を再度アップロードしてください。</p>
+            </li>
+        </ol>
+    </div>
+
+    <div id="Notifications" class="tab-content">
+        <h2>自動メール通知について</h2>
+        <p>このアプリでは、特定の条件になると担当者宛に自動でメールが送信され、更新漏れを防ぎます。通知の種類は以下の通りです。</p>
+
+        <h3>1. 許可証の期限3ヶ月前通知</h3>
+        <ul>
+            <li><strong>送信タイミング:</strong> 許可証の有効期限が<strong>3ヶ月以内</strong>になった場合に送信されます。</li>
+            <li><strong>通知内容:</strong> 対象となる許可証の名称、許可地、許可番号、有効年月日などが記載されています。</li>
+            <li><strong>除外条件:</strong>
+                <ul>
+                    <li>すでにアプリで更新ステータスが「申請中」になっている。</li>
+                    <li>特定の許可証（最終処分業）。</li>
+                    <li>すでにこの通知が送信済みである。</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>2. 許可証の期限2ヶ月前通知</h3>
+        <ul>
+            <li><strong>送信タイミング:</strong> 許可証の有効期限が<strong>2ヶ月以内</strong>になった場合に送信されます。（上記3ヶ月前通知の後、申請対応が行われていない場合のリマインダーです）</li>
+            <li><strong>通知内容:</strong> 3ヶ月前通知と同様です。</li>
+            <li><strong>除外条件:</strong>
+                <ul>
+                    <li>すでにアプリで更新ステータスが「申請中」になっている。</li>
+                    <li>特定の許可証（最終処分業）。</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>3. 修了証の更新案内通知</h3>
+        <ul>
+            <li><strong>送信タイミング:</strong> 許可証の更新に際し、関連する<strong>修了証の有効期限が先に切れてしまう</strong>と判明した場合に送信されます。（具体的には、許可証の期限が半年以内で、かつ修了証の期限が許可証期限の3ヶ月前よりも古い場合）</li>
+            <li><strong>通知内容:</strong> 更新が必要な修了証の情報と、関連する代表的な許可証の情報が記載されています。</li>
+            <li><strong>除外条件:</strong>
+                 <ul>
+                    <li>特定の許可証（最終処分業）。</li>
+                    <li>すでにこの通知が送信済みである。</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>4. 期限切れ許可証の更新依頼</h3>
+        <ul>
+            <li><strong>送信タイミング:</strong> 許可証の有効期限が<strong>過ぎてしまった</strong>場合に送信されます。</li>
+            <li><strong>通知内容:</strong> 期限が切れた許可証の一覧が記載され、アプリでの更新作業を促します。</li>
+            <li><strong>除外条件:</strong>
+                <ul>
+                    <li>すでにアプリで更新ステータスが「申請中」になっている。</li>
+                    <li>特定の許可証（最終処分業）。</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>5. 【特定顧客向け】期限切れ通知</h3>
+         <ul>
+            <li><strong>送信タイミング:</strong> 特定の許可証（最終処分業）の有効期限が<strong>過ぎてしまった</strong>場合にのみ、特別に送信されます。</li>
+            <li><strong>通知内容:</strong> 対象の許可証情報が記載されています。</li>
+            <li><strong>除外条件:</strong> すでにアプリで更新ステータスが「申請中」になっている。</li>
+        </ul>
+    </div>
+
+
+    <script>
+        function openTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tab");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+    </script>
+
+</body>
+</html>
