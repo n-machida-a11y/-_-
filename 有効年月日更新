@@ -1,0 +1,54 @@
+function onChangeTrigger() {
+  const S_NAME = "許可証"; // シート名
+  const H_COL = 8;  // H列 (更新日)
+  const E_COL = 5;  // E列 (許可有効年月日)
+  const G_COL = 7;  // G列 (更新)
+  const I_COL = 9;  // I列 (クリア対象)
+  const J_COL = 10;  // I列 (クリア対象)
+
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName(S_NAME);
+  if (!sheet) return; // シートが見つからなければ終了
+
+  const lastRow = sheet.getLastRow();
+  
+  // 最終行から遡って処理
+  for (let r = lastRow; r >= 1; r--) {
+    const hCell = sheet.getRange(r, H_COL);
+    const eCell = sheet.getRange(r, E_COL);
+    const gCell = sheet.getRange(r, G_COL);
+    const iCell = sheet.getRange(r, I_COL); // I列のセルを取得
+    const jCell = sheet.getRange(r, J_COL); // J列のセルを取得
+
+    let hVal = hCell.getValue();
+
+    // H列に値があれば処理
+    if (hVal) {
+      let dateVal;
+      if (hVal instanceof Date) {
+        dateVal = hVal;
+      } else {
+        try {
+          dateVal = new Date(hVal);
+          if (isNaN(dateVal.getTime())) dateVal = null; // 無効な日付
+        } catch (e) {
+          dateVal = null; // 変換エラー
+        }
+      }
+
+      if (dateVal) { // 有効な日付が取得できたら
+        // 更新日から5年後の前日を有効期限として設定
+        const newExpDate = new Date(dateVal);
+        newExpDate.setFullYear(newExpDate.getFullYear() + 5);
+        newExpDate.setDate(newExpDate.getDate() - 1);
+        eCell.setValue(newExpDate);   // E列に更新日+5年-1日を設定
+        hCell.clearContent();      // H列をクリア
+        gCell.setValue("未");      // G列を「未」に
+        iCell.clearContent();      // I列をクリア
+        jCell.clearContent();
+        
+        // 【修正箇所】ここで return; をしていたため、1件処理すると終わっていました。
+        // return; を削除することで、次の行のチェックへ進みます。
+      }
+    }
+  }
+}
